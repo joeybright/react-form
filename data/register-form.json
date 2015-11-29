@@ -1,0 +1,31 @@
+
+{
+  "className" : "register-form",
+  "fields" : [
+    {
+      "className" : "email-address",
+      "label" : "Email Address",
+      "type" : "text",
+      "hideContents" : false,
+      "checkAgainst" : "",
+      "errorMessage" : "It looks like this email is wrong!"
+    },
+    {
+      "className" : "password",
+      "label" : "Password",
+      "type" : "text",
+      "hideContents" : true,
+      "checkAgainst" : "",
+      "errorMessage" : "Your password isn't strong enough!"
+    },
+    {
+      "type" : "cool"
+    }
+  ],
+  "submit" : {
+    "className" : "submit",
+    "text" : "Register",
+    "submitType" : "POST",
+    "submitTo" : ""
+  }
+}
