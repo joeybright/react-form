@@ -1,7 +1,7 @@
 
 // components/EmailInput.jsx
 var React = require('react')
-var TextInput = require('./TextInput.jsx')
+var Input = require('./Input.jsx')
 
 var EmailInput = React.createClass({
   getInitialState: function() {
@@ -13,6 +13,7 @@ var EmailInput = React.createClass({
     }
   },
   checkEmail: function(event) {
+    console.log("CHECKING EMAIL");
     // var email = event.target.value,
     //     regEx = new Regex(0),
     //     result = regEx.test(email);
@@ -29,7 +30,13 @@ var EmailInput = React.createClass({
   },
   render: function () {
     return (
-      <TextInput type="email" label={this.props.label} onBlurEvent={this.checkEmail} {...this.props} />
+      <Input
+        type="email"
+        label={this.props.label}
+        placeholder={this.props.placeholder}
+        isRequired={this.props.isRequired}
+        onBlurFunc={this.checkEmail}
+        onChangeFunc={this.props.onChangeFunc} />
     )
   }
 });
