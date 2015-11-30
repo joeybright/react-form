@@ -29,7 +29,7 @@ var PasswordInput = React.createClass({
   },
   render: function () {
     return (
-      <TextInput type="password" label={this.props.label} errorMessage={this.state.error} onBlur={this.checkPassword} onChange={this.checkError} {...this.props} />
+      <TextInput type="password" label={this.props.label} errorMessage={this.state.error} onBlurEvent={this.checkPassword} onChange={this.checkError} {...this.props} />
     )
   }
 });
