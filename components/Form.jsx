@@ -6,7 +6,7 @@ var EmailInput = require('./EmailInput.jsx')
 var SubmitButton = require('./SubmitButton.jsx')
 var PasswordInput = require('./PasswordInput.jsx')
 
-var ContactForm = React.createClass({
+var Form = React.createClass({
   getDefaultProps: function() {
     return this.data;
   },
@@ -21,7 +21,7 @@ var ContactForm = React.createClass({
   },
   render: function () {
     return (
-      <form name="registerForm" className="register-form w100p">
+      <form name="registerForm" className="register-form w100p" onError={this.props.onError}>
         <TextInput label="First Name" name="first-name" placeholder="John" isRequired="true" onChange={this.updateState} />
         <TextInput label="Last Name" name="last-name" placeholder="Doe" isRequired="true" onChange={this.updateState} />
         <EmailInput label="Email address" name="email-address" placeholder="example@domain.com" isRequired="true" onChange={this.updateState} />
@@ -33,4 +33,4 @@ var ContactForm = React.createClass({
   }
 });
 
-module.exports = ContactForm
+module.exports = Form
