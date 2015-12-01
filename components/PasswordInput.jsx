@@ -5,11 +5,8 @@ var Input = require('./Input.jsx')
 
 var PasswordInput = React.createClass({
   getInitialState: function() {
-    // Sets the current error state to blank
-    return {
-      error: "",
-      hasError: false
-    }
+    // Sets the current error state to blank and false
+    return {error: ""}
   },
   // Checks the password against a RegExp
   checkPassword: function(e) {
@@ -18,7 +15,6 @@ var PasswordInput = React.createClass({
         result = regEx.test(password);
     // Start off by removing whatever error was already there
     this.setState({error: ""});
-    this.setState({hasError: false});
     // If the event is an input
     if(e.type != "input") {
       // And if the password exists
@@ -26,8 +22,7 @@ var PasswordInput = React.createClass({
         // And the password does not match the RegExp
         if(result === false) {
           // Then there's an error and let the user know
-          this.setState({error: "Your password is too short. It must be at least 5 characters long."});
-          return this.setState({hasError: true});
+          return this.setState({error: "Your password is too short. It must be at least 5 characters long."});
         }
       }
     }
