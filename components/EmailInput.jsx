@@ -10,6 +10,10 @@ var EmailInput = React.createClass({
     // Sets the current error state to blank and false
     return {error: ""}
   },
+  handleChange: function(e) {
+    this.checkEmail(e);
+    this.props.onChangeFunc(e);
+  },
   // Checks the password against a RegExp
   checkEmail: function(e) {
     var regExp = new RegExp("^[a-z0-9](\\.?[a-z0-9_-]){0,}@[a-z0-9-]+\\.([a-z]{1,6}\\.)?[a-z]{2,6}$", "g");
@@ -22,12 +26,13 @@ var EmailInput = React.createClass({
     return (
       <Input
         type="email"
+        name={this.props.name}
         label={this.props.label}
         placeholder={this.props.placeholder}
         isRequired={this.props.isRequired}
         errorMessage={this.state.error}
-        onBlurFunc={this.checkEmail}
-        onChangeFunc={this.checkEmail} />
+        onBlurFunc={this.handleChange}
+        onChangeFunc={this.handleChange} />
     )
   }
 });
