@@ -18,15 +18,23 @@ var Input = React.createClass({
   // Handles onChange event
   handleChange: function(e) {
     this.checkInput(e);
-    this.props.onChangeFunc(e);
+    if(this.props.onChangeFunc) {
+      this.props.onChangeFunc(e);
+    }
   },
   // Handles onBlur event
   handleBlur: function(e) {
     this.checkInput(e);
+    if(this.props.onBlurFunc) {
+        this.props.onBlurFunc(e);
+    }
   },
   // Handles onFocus event
   handleFocus: function(e) {
     this.checkInput(e);
+    if(this.props.onFocusFunc) {
+        this.props.onFocusFunc(e);
+    }
   },
   // Run when any changes happen to the input
   checkInput: function(e) {
