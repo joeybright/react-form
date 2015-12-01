@@ -55,10 +55,6 @@ var Input = React.createClass({
       this.setState({errorMessage: errorMessage});
       this.setState({hasError: true});
     }
-    //
-    if(this.props.onBlurFunc) {
-      this.props.onBlurFunc();
-    }
   },
   displayLabel: function() {
     if(this.props.label) {
