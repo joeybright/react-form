@@ -1,6 +1,9 @@
 
 // helpers/InputErrorHandling.js
 
+// Handles the input error handling for:
+// components/EmailInput.jsx
+// components/PasswordInput.jsx
 var inputErrorHandling = function(e, regExp, errorMessage) {
   var result = regExp.test(e.target.value);
   // If the event is an input

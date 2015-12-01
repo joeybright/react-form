@@ -2,6 +2,7 @@
 // components/EmailInput.jsx
 var React = require('react')
 var Input = require('./Input.jsx')
+//
 var errorHandling = require('../helpers/inputErrorHandling.jsx')
 
 var EmailInput = React.createClass({
