@@ -1,6 +1,6 @@
 
 {
-  "className" : "register-form",
+  "className" : "register-form w100p",
   "fields" : [
     {
       "className" : "email-address",
