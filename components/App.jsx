@@ -14,8 +14,9 @@ var App = React.createClass({
   handleContactFormError: function(e) {
     console.log(e);
   },
-  handleContactFormSubmit: function(e) {
+  handleContactFormSubmit: function(e, data) {
     console.log(e);
+    console.log(data);
   },
   render: function () {
     return (

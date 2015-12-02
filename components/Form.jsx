@@ -15,12 +15,11 @@ var formData = {};
 var Form = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
-    return console.log(formData);
+    this.props.onSubmit(e, formData);
   },
   saveData: function(e) {
     var name = e.target.name;
-    formData[name] = e.target.value;
-    return this.setState(formData);
+    return formData[name] = e.target.value;
   },
   generateForm: function(form) {
     // Maps the fields array
