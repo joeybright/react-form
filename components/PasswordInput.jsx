@@ -14,6 +14,10 @@ var PasswordInput = React.createClass({
     this.checkPassword(e);
     this.props.onChangeFunc(e);
   },
+  handleError: function(e) {
+    // console.log("pswrd", e);
+    this.props.handleError(e);
+  },
   // Checks the password against a RegExp
   checkPassword: function(e) {
     var regExp = new RegExp("[a-z0-9]{5,}", "g");
@@ -32,7 +36,8 @@ var PasswordInput = React.createClass({
         isRequired={this.props.isRequired}
         errorMessage={this.state.error}
         onBlurFunc={this.handleChange}
-        onChangeFunc={this.handleChange} />
+        onChangeFunc={this.handleChange}
+        handleError={this.handleError} />
     )
   }
 });

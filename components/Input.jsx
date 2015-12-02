@@ -14,20 +14,26 @@ var inputStyles = {
   marginBottom: "5px"
 }
 
+var hasEnteredInput = false;
+var errorMessage;
+
 var Input = React.createClass({
   getDefaultProps: function() {
     return {
       type: "text",
-      errorMessage: "",
-      hasError: false
+      errorMessage: ""
     }
   },
   // Set the initial errorMessage state to "" (no error)
   getInitialState: function() {
-    return {errorMessage: ""}
+    return {
+      errorMessage: "",
+      hasError: false
+    }
   },
   // Handles onChange event
   handleChange: function(e) {
+    // console.log('Change: ', e.target.value);
     this.checkInput(e);
     if(this.props.onChangeFunc) {
       this.props.onChangeFunc(e);
@@ -35,37 +41,36 @@ var Input = React.createClass({
   },
   // Handles onBlur event
   handleBlur: function(e) {
+    // console.log('Blur: ', e.target.value);
     this.checkInput(e);
     if(this.props.onBlurFunc) {
-        this.props.onBlurFunc(e);
+      this.props.onBlurFunc(e);
     }
   },
   // Handles onFocus event
   handleFocus: function(e) {
+    // console.log('Focus: ', e.target.value);
     this.checkInput(e);
     if(this.props.onFocusFunc) {
-        this.props.onFocusFunc(e);
+      this.props.onFocusFunc(e);
     }
   },
   // Run when any changes happen to the input
   checkInput: function(e) {
-    // Resets the error state
-    this.setState({errorMessage: ""});
-    this.setState({hasError: false});
-    // Checks to see:
-    if(
-    // if the input is required
-    this.props.isRequired === "true" &&
-    // and if the value is blank ("")
-    e.target.value === "" &&
-    e.type !== "focus" ) {
-      // Creates an error message based off of the label
-      var errorMessage = this.props.label + " is a required field!";
-      // TODO: If there isn't a label, has a default message
-      // Sets the error message and state
-      this.setState({errorMessage: errorMessage});
-      this.setState({hasError: true});
+    if(this.props.isRequired === "true" && hasEnteredInput !== false) {
+      var stringLength = e.target.value.split("").length,
+          doesHaveError = false;
+      // Checks to see if the value is blank ("")
+      if(stringLength == 0) {
+        doesHaveError = true;
+      }
+      // Sets state to new value
+      this.setState({hasError: doesHaveError}, function() {
+        // Then bubbles the state up to the parent
+        return this.props.handleError(this.state.hasError);
+      });
     }
+    return hasEnteredInput = true;
   },
   displayLabel: function() {
     if(this.props.label) {
@@ -79,14 +84,15 @@ var Input = React.createClass({
     }
   },
   displayError: function() {
-    if(this.props.errorMessage) {
+    if(this.props.hasError) {
       return ( <InputError errorMessage={this.props.errorMessage} /> )
     }
-    if (this.state.errorMessage) {
-      return ( <InputError errorMessage={this.state.errorMessage} /> )
+    if (this.state.hasError) {
+      return ( <InputError errorMessage={errorMessage} /> )
     }
   },
   render: function () {
+    errorMessage = this.props.label + " is a required field!";
     return (
       <div style={inputContainerStyles}>
         <label>

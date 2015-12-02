@@ -14,6 +14,10 @@ var EmailInput = React.createClass({
     this.checkEmail(e);
     this.props.onChangeFunc(e);
   },
+  handleError: function(e) {
+    // console.log("eml", e);
+    // this.props.handleError(e);
+  },
   // Checks the password against a RegExp
   checkEmail: function(e) {
     var regExp = new RegExp("^[a-z0-9](\\.?[a-z0-9_-]){0,}@[a-z0-9-]+\\.([a-z]{1,6}\\.)?[a-z]{2,6}$", "g");
@@ -32,7 +36,8 @@ var EmailInput = React.createClass({
         isRequired={this.props.isRequired}
         errorMessage={this.state.error}
         onBlurFunc={this.handleChange}
-        onChangeFunc={this.handleChange} />
+        onChangeFunc={this.handleChange}
+        handleError={this.handleError} />
     )
   }
 });

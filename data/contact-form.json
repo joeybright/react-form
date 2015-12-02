@@ -22,7 +22,8 @@
       "label" : "First Name",
       "name" : "first-name",
       "type" : "text",
-      "placeholder" : "First name here, please"
+      "placeholder" : "First name here, please",
+      "isRequired" : "true"
     }
   ],
   "submit" : {

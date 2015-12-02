@@ -8,13 +8,14 @@ var submitButtonStyles = {
   borderRadius: "3px",
   background: "#efefef",
   fontSize: "16px",
-  marginTop: "5px"
+  marginTop: "5px",
+  border: "0"
 }
 
 var SubmitButton = React.createClass({
   render: function () {
     return (
-      <button style={submitButtonStyles} type="submit" onClick={this.props.onClick}>
+      <button style={submitButtonStyles} type="submit" onClick={this.props.onClick} {...this.props}>
         {this.props.text}
       </button>
     )

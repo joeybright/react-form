@@ -13,9 +13,18 @@ var formStyles = {
 var formData = {};
 
 var Form = React.createClass({
+  // Set the initial errorMessage state to "" (no error)
+  getInitialState: function() {
+    return {hasError: true}
+  },
   handleSubmit: function(e) {
     e.preventDefault();
     this.props.onSubmit(e, formData);
+  },
+  handleError: function(error) {
+    this.setState({hasError: error}, function() {
+      this.props.onError(this.state.hasError);
+    });
   },
   saveData: function(e) {
     var name = e.target.name;
@@ -27,37 +36,53 @@ var Form = React.createClass({
       switch(data.type) {
         case "text":
           return <Input
+                  key={data.id}
                   label={data.label}
                   name={data.name}
                   placeholder={data.placeholder}
                   isRequired={data.isRequired}
-                  onChangeFunc={form.saveData} />
+                  onChangeFunc={form.saveData}
+                  handleError={form.handleError}/>
           break;
         case "password":
           return <PasswordInput
+                  key={data.id}
                   label={data.label}
                   name={data.name}
                   placeholder={data.placeholder}
                   isRequired={data.isRequired}
-                  onChangeFunc={form.saveData} />
+                  onChangeFunc={form.saveData}
+                  handleError={form.handleError} />
           break;
         case "email":
           return <EmailInput
+                  key={data.id}
                   label={data.label}
                   name={data.name}
                   placeholder={data.placeholder}
                   isRequired={data.isRequired}
-                  onChangeFunc={form.saveData} />
+                  onChangeFunc={form.saveData}
+                  handleError={form.handleError}/>
           break;
       }
     });
     return formNodes;
   },
+  displaySubmitButton: function() {
+    if(this.state.hasError == true) {
+      return (
+        <SubmitButton text={this.props.data.submit.text} onClick={this.handleSubmit} disabled="true" />
+      )
+    }
+    return (
+      <SubmitButton text={this.props.data.submit.text} onClick={this.handleSubmit} />
+    )
+  },
   render: function () {
     return (
-      <form name="registerForm" style={formStyles} onError={this.props.onError}>
+      <form name="registerForm" style={formStyles}>
         {this.generateForm(this)}
-        <SubmitButton text={this.props.data.submit.text} onClick={this.handleSubmit} />
+        {this.displaySubmitButton()}
       </form>
     )
   }
