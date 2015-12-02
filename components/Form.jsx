@@ -6,24 +6,54 @@ var EmailInput = require('./EmailInput.jsx')
 var SubmitButton = require('./SubmitButton.jsx')
 var PasswordInput = require('./PasswordInput.jsx')
 
+var formData = {};
+
 var Form = React.createClass({
   handleSubmit: function(e) {
     e.preventDefault();
-    return console.log(this.state);
+    return console.log(formData);
   },
-  updateState: function(e) {
-    var obj = {};
-    obj[e.target.name] = e.target.value;
-    return this.setState(obj);
+  saveData: function(e) {
+    var name = e.target.name;
+    formData[name] = e.target.value;
+    return this.setState(formData);
+  },
+  generateForm: function(form) {
+    // Maps the fields array
+    var formNodes = this.props.data.fields.map(function(data) {
+      switch(data.type) {
+        case "text":
+          return <Input
+                  label={data.label}
+                  name={data.name}
+                  placeholder={data.placeholder}
+                  isRequired={data.isRequired}
+                  onChangeFunc={form.saveData} />
+          break;
+        case "password":
+          return <PasswordInput
+                  label={data.label}
+                  name={data.name}
+                  placeholder={data.placeholder}
+                  isRequired={data.isRequired}
+                  onChangeFunc={form.saveData} />
+          break;
+        case "email":
+          return <EmailInput
+                  label={data.label}
+                  name={data.name}
+                  placeholder={data.placeholder}
+                  isRequired={data.isRequired}
+                  onChangeFunc={form.saveData} />
+          break;
+      }
+    });
+    return formNodes;
   },
   render: function () {
     return (
-      <form name="registerForm" className="register-form w100p" onError={this.props.onError}>
-        <Input label="First Name" name="first-name" placeholder="John" isRequired="true" onChangeFunc={this.updateState} />
-        <Input label="Last Name" name="last-name" placeholder="Doe" isRequired="true" onChangeFunc={this.updateState} />
-        <EmailInput label="Email address" name="email-address" placeholder="example@domain.com" isRequired="true" onChangeFunc={this.updateState} />
-        <PasswordInput label="Password" name="password" placeholder="averystrong1" isRequired="true" onChangeFunc={this.updateState} />
-        <Input label="Favorite Pet" name="favorite-pet" placeholder="Spot" onChangeFunc={this.updateState} />
+      <form name="registerForm" className={this.props.data.className} onError={this.props.onError}>
+        {this.generateForm(this)}
         <SubmitButton text="Register" onClick={this.handleSubmit} />
       </form>
     )

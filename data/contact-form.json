@@ -5,21 +5,21 @@
     {
       "className" : "email-address",
       "label" : "Email Address",
-      "type" : "text",
-      "hideContents" : false,
-      "checkAgainst" : "",
-      "errorMessage" : "It looks like this email is wrong!"
+      "name" : "email-address",
+      "type" : "email",
+      "errorMessage" : "It looks like this email is wrong!",
+      "isRequired" : "true"
     },
     {
       "className" : "password",
       "label" : "Password",
-      "type" : "text",
-      "hideContents" : true,
-      "checkAgainst" : "",
+      "name" : "password",
+      "type" : "password",
       "errorMessage" : "Your password isn't strong enough!"
     },
     {
-      "type" : "cool"
+      "type" : "text",
+      "name" : "txt"
     }
   ],
   "submit" : {
