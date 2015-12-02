@@ -57,7 +57,7 @@ var Form = React.createClass({
     return (
       <form name="registerForm" style={formStyles} onError={this.props.onError}>
         {this.generateForm(this)}
-        <SubmitButton text="Register" onClick={this.handleSubmit} />
+        <SubmitButton text={this.props.data.submit.text} onClick={this.handleSubmit} />
       </form>
     )
   }
