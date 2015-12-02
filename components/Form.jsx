@@ -7,9 +7,6 @@ var SubmitButton = require('./SubmitButton.jsx')
 var PasswordInput = require('./PasswordInput.jsx')
 
 var Form = React.createClass({
-  getDefaultProps: function() {
-    return this.data;
-  },
   handleSubmit: function(e) {
     e.preventDefault();
     return console.log(this.state);
