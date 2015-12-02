@@ -3,27 +3,29 @@
   "className" : "register-form w100p",
   "fields" : [
     {
-      "className" : "email-address",
       "label" : "Email Address",
       "name" : "email-address",
       "type" : "email",
       "errorMessage" : "It looks like this email is wrong!",
-      "isRequired" : "true"
+      "isRequired" : "true",
+      "placeholder" : "user@domain.com"
     },
     {
-      "className" : "password",
       "label" : "Password",
       "name" : "password",
       "type" : "password",
-      "errorMessage" : "Your password isn't strong enough!"
+      "isRequired" : "true",
+      "errorMessage" : "Your password isn't strong enough!",
+      "placeholder" : "averystrong1"
     },
     {
+      "label" : "First Name",
+      "name" : "first-name",
       "type" : "text",
-      "name" : "txt"
+      "placeholder" : "First name here, please"
     }
   ],
   "submit" : {
-    "className" : "submit",
     "text" : "Register",
     "submitType" : "POST",
     "submitTo" : ""
