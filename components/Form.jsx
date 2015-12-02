@@ -6,6 +6,10 @@ var EmailInput = require('./EmailInput.jsx')
 var SubmitButton = require('./SubmitButton.jsx')
 var PasswordInput = require('./PasswordInput.jsx')
 
+var formStyles = {
+  width: "100%"
+}
+
 var formData = {};
 
 var Form = React.createClass({
@@ -52,7 +56,7 @@ var Form = React.createClass({
   },
   render: function () {
     return (
-      <form name="registerForm" className={this.props.data.className} onError={this.props.onError}>
+      <form name="registerForm" style={formStyles} onError={this.props.onError}>
         {this.generateForm(this)}
         <SubmitButton text="Register" onClick={this.handleSubmit} />
       </form>

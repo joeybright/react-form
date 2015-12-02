@@ -2,6 +2,17 @@
 // components/TextInput.jsx
 var React = require('react')
 var InputError = require('./InputError.jsx')
+var InputLabel = require('./InputLabel.jsx')
+
+var inputContainerStyles = {
+  margin: "10px 0"
+}
+var inputStyles = {
+  width: "100%",
+  padding: "15px",
+  fontSize: "16px",
+  marginBottom: "5px"
+}
 
 var Input = React.createClass({
   getDefaultProps: function() {
@@ -63,7 +74,7 @@ var Input = React.createClass({
         var label = label + "*"
       }
       return (
-        <span className="w100p ts-small tc-gray mb5 display-block">{label}</span>
+        <InputLabel text={label} />
       )
     }
   },
@@ -77,19 +88,21 @@ var Input = React.createClass({
   },
   render: function () {
     return (
-      <label className="display-block">
-        {this.displayLabel()}
-        <input
-          className="w100p p15 mb5"
-          type={this.props.type}
-          placeholder={this.props.placeholder}
-          name={this.props.name}
-          onBlur={this.handleBlur}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}>
-        </input>
-        {this.displayError()}
-      </label>
+      <div style={inputContainerStyles}>
+        <label>
+          {this.displayLabel()}
+          <input
+            style={inputStyles}
+            type={this.props.type}
+            placeholder={this.props.placeholder}
+            name={this.props.name}
+            onBlur={this.handleBlur}
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}>
+          </input>
+          {this.displayError()}
+        </label>
+      </div>
     )
   }
 });

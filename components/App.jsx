@@ -2,10 +2,13 @@
 // components/App.jsx
 var React = require('react')
 var ContactForm = require('./Form.jsx')
-// styles
-var styles = require('../styles/app.scss')
-// data
+
 var contactFormData = require('../data/contact-form.json')
+
+var contactFormStyles = {
+  width: "500px",
+  margin: "auto"
+}
 
 var App = React.createClass({
   handleContactFormError: function(e) {
@@ -16,7 +19,7 @@ var App = React.createClass({
   },
   render: function () {
     return (
-      <div className="w500 ma">
+      <div style={contactFormStyles}>
         <h1>Testing a form thing with React</h1>
         <ContactForm
           data = {contactFormData}
