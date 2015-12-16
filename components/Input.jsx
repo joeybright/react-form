@@ -44,7 +44,10 @@ var Input = React.createClass({
     onFocusFunc: React.PropTypes.func,
     // A function that's passed from parent
     // Should pass an error object (TBD) to this function
-    handleError: React.PropTypes.func.isRequired
+    handleError: React.PropTypes.func.isRequired,
+    // If the the form start out with an error
+    // Defaults to false
+    hasError: React.PropTypes.bool.isRequired
   },
   // Defines the default props
   getDefaultProps: function() {
@@ -53,7 +56,8 @@ var Input = React.createClass({
     // errorMessage in-dev.
     return {
       type: "text",
-      errorMessage: ""
+      errorMessage: "",
+      hasError: false
     }
   },
   // Set the initial state
