@@ -13,11 +13,11 @@ var inputErrorHandling = function(e, regExp, errorMessage) {
       // And the password does not match the RegExp
       if(result === false) {
         // Then there's an error and let the user know
-        return {error: errorMessage};
+        return {hasError: true};
       }
     }
   }
-  return {error: ""};
+  return {hasError: false};
 }
 
 module.exports = inputErrorHandling
