@@ -4,6 +4,8 @@ var React = require('react')
 var InputError = require('./InputError.jsx')
 var InputLabel = require('./InputLabel.jsx')
 
+var errorHandling = require('../helpers/inputErrorHandling.jsx')
+
 var inputContainerStyles = {
   margin: "10px 0"
 }
@@ -120,6 +122,28 @@ var Input = React.createClass({
     }
     // If the prop is not required or hasn't been entered, set hasEnteredInput to true
     return hasEnteredInput = true;
+  },
+  // Checks the password against a RegExp
+  checkPassword: function(e) {
+    var regExp = new RegExp("[a-z0-9]{5,}", "g");
+    // Start off by removing whatever error was already there
+    this.setState({hasError: false});
+    // Then run the errorHandling function, passing the event, the RegExp to compare against, and the error message
+    return this.setState(errorHandling(e, regExp, "Your password is too short!"), function() {
+      this.setState({errorMessage: "Your password is too short! It must be at least 6 characters long."})
+      return this.props.setCanSubmit(this.state.hasError);
+    });
+  },
+  // Checks the password against a RegExp
+  checkEmail: function(e) {
+    var regExp = new RegExp("^[a-z0-9](\\.?[a-z0-9_-]){0,}@[a-z0-9-]+\\.([a-z]{1,6}\\.)?[a-z]{2,6}$", "g");
+    // Start off by removing whatever error was already there
+    this.setState({hasError: false});
+    // Then run the errorHandling function, passing the event, the RegExp to compare against, and the error message
+    return this.setState(errorHandling(e, regExp, "That doesn't look quite like an email address."), function() {
+      this.setState({errorMessage: "That doesn't look quite like an email address."})
+      return this.props.setCanSubmit(this.state.hasError);
+    });
   },
   // Renders the label (if there is one)
   displayLabel: function() {
