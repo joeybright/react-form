@@ -116,6 +116,8 @@ var Form = React.createClass({
     });
     return formNodes;
   },
+  // Displays the submit button, diabled if the form can't (and shouldn't submit)
+  // Enabled if it can submit
   displaySubmitButton: function() {
     if(this.state.canSubmit == false &&
        this.state.hasError == true) {
