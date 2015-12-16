@@ -7,14 +7,14 @@
       "name" : "email-address",
       "type" : "email",
       "errorMessage" : "It looks like this email is wrong!",
-      "isRequired" : "true",
+      "isRequired" : true,
       "placeholder" : "user@domain.com"
     },
     {
       "label" : "Password",
       "name" : "password",
       "type" : "password",
-      "isRequired" : "true",
+      "isRequired" : true,
       "errorMessage" : "Your password isn't strong enough!",
       "placeholder" : "averystrong1"
     },
@@ -23,7 +23,14 @@
       "name" : "first-name",
       "type" : "text",
       "placeholder" : "First name here, please",
-      "isRequired" : "true"
+      "isRequired" : true
+    },
+    {
+      "label" : "Last Name",
+      "name" : "lase-name",
+      "type" : "text",
+      "isRequired" : false,
+      "placeholder" : "First name here, please"
     }
   ],
   "submit" : {
