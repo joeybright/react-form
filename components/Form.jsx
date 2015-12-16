@@ -83,7 +83,6 @@ var Form = React.createClass({
       switch(data.type) {
         case "text":
           return <Input
-                  key={i}
                   label={data.label}
                   name={data.name}
                   placeholder={data.placeholder}
@@ -94,7 +93,6 @@ var Form = React.createClass({
         case "password":
           return <Input
                   type="password"
-                  key={i}
                   label={data.label}
                   name={data.name}
                   placeholder={data.placeholder}
@@ -106,7 +104,6 @@ var Form = React.createClass({
         case "email":
           return <Input
                   type="email"
-                  key={i}
                   label={data.label}
                   name={data.name}
                   placeholder={data.placeholder}
