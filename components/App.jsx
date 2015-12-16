@@ -9,6 +9,9 @@ var contactFormStyles = {
   width: "500px",
   margin: "auto"
 }
+var headerStyles = {
+  fontFamily: "Helvetica, sans-serif"
+}
 
 var App = React.createClass({
   handleContactFormError: function(e) {
@@ -20,7 +23,7 @@ var App = React.createClass({
   render: function () {
     return (
       <div style={contactFormStyles}>
-        <h1>Testing a form thing with React</h1>
+        <h1 style={headerStyles}>Testing a form thing with React</h1>
         <ContactForm
           data = {contactFormData}
           onError = {this.handleContactFormError}

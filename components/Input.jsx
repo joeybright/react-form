@@ -12,8 +12,13 @@ var inputContainerStyles = {
 var inputStyles = {
   width: "100%",
   padding: "15px",
+  fontFamily: "Helvetica, sans-serif",
   fontSize: "16px",
-  marginBottom: "5px"
+  marginBottom: "5px",
+  boxSizing: "border-box",
+  border: "1px solid #cfcfcf",
+  boxShadow: "none",
+  borderRadius: "3px"
 }
 
 var hasEnteredInput = false;
