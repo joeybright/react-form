@@ -10,10 +10,16 @@ var errorStyles = {
 }
 
 var InputError = React.createClass({
+  propTypes: {
+    // The error message that will be displayed
+    errorMessage: React.PropTypes.string.isRequired
+  },
   getDefaultProps: function() {
+    // Defaults to no error message
     return {errorMessage: ""}
   },
   render: function () {
+    // Renders a simple span with the appropriate styling
     return (
       <span style={errorStyles}>{this.props.errorMessage}</span>
     )
