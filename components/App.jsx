@@ -12,11 +12,10 @@ var contactFormStyles = {
 
 var App = React.createClass({
   handleContactFormError: function(e) {
-    console.log("App: ", e);
+    console.log("App Cntct Frm Errr: ", e);
   },
   handleContactFormSubmit: function(e, data) {
-    // console.log("App: ", e);
-    // console.log("App: ", data);
+    console.log("App Hndl Frm Sbmt: ", data);
   },
   render: function () {
     return (
