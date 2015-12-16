@@ -9,7 +9,6 @@ var formStyles = {
 }
 
 var formData = {};
-var errors = {};
 
 var Form = React.createClass({
   propTypes: {
@@ -25,12 +24,7 @@ var Form = React.createClass({
   // ************************************************************************
   getInitialState: function() {
     return {
-      hasError: false,
-      canSubmit: false,
-      error: {
-        message: "",
-        name: ""
-      },
+      canSubmit: false
     }
   },
   // ************************************************************************
@@ -39,8 +33,13 @@ var Form = React.createClass({
   handleSubmit: function(e) {
     // Prevents default action
     e.preventDefault();
-    // Bubbles up both the event and the formData object
-    this.props.onSubmit(e, formData);
+    // If the form can submit
+    if(this.state.canSubmit === true) {
+      // Bubbles up both the event and the formData object
+      this.props.onSubmit(e, formData);
+    } else {
+      console.log("Can't submit this form!");
+    }
   },
   // Both handle error and set can submit need to update an object
   // similar to how form data is being handled (using the "name" attr)
@@ -50,12 +49,17 @@ var Form = React.createClass({
   // if they can't submit
   // set state to false (true otherwise)
   handleError: function(error) {
-    this.setState({hasError: error.hasError}, function() {
-      return this.props.onError({
-        hasError: this.state.hasError,
-        error: error.info
-      });
-    });
+    console.log(error);
+    // this.setState(
+    //   {
+    //     error: {
+    //       hasError: this.state.hasError,
+    //       errorMessage: error.info
+    //     }
+    //   }, function() {
+    //     // Bubble up to parent
+    //     // return this.props.onError(this.state);
+    // });
   },
   // ************************************************************************
   // CHECK
@@ -98,8 +102,7 @@ var Form = React.createClass({
                   placeholder={data.placeholder}
                   isRequired={data.isRequired}
                   onChangeFunc={form.saveData}
-                  handleError={form.handleError}
-                  setCanSubmit={form.setCanSubmit} />
+                  handleError={form.handleError} />
           break;
         case "email":
           return <Input
@@ -109,8 +112,7 @@ var Form = React.createClass({
                   placeholder={data.placeholder}
                   isRequired={data.isRequired}
                   onChangeFunc={form.saveData}
-                  handleError={form.handleError}
-                  setCanSubmit={form.setCanSubmit} />
+                  handleError={form.handleError} />
           break;
       }
     });

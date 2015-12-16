@@ -4,8 +4,6 @@ var React = require('react')
 var InputError = require('./InputError.jsx')
 var InputLabel = require('./InputLabel.jsx')
 
-var errorHandling = require('../helpers/inputErrorHandling.jsx')
-
 var inputContainerStyles = {
   margin: "10px 0"
 }
@@ -23,6 +21,8 @@ var inputStyles = {
 
 var hasEnteredInput = false;
 var errorMessage;
+var passwordRegExp = new RegExp("[a-z0-9]{5,}", "g");
+var emailRegExp = new RegExp("^[a-z0-9](\\.?[a-z0-9_-]){0,}@[a-z0-9-]+\\.([a-z]{1,6}\\.)?[a-z]{2,6}$", "g");
 
 var Input = React.createClass({
   // Define propTypes for development purposes
@@ -63,11 +63,8 @@ var Input = React.createClass({
   getDefaultProps: function() {
     // Currently defines the type as "text"
     // If there is another type prop passed, it will overwrite this default prop
-    // errorMessage in-dev.
     return {
-      type: "text",
-      errorMessage: "",
-      hasError: false
+      type: "text"
     }
   },
   // Set the initial state
@@ -75,8 +72,11 @@ var Input = React.createClass({
     // Sets the errorMessage string and hasError boolean to empty and false
     // The component can change it's own state or change states via passed props
     return {
-      errorMessage: "",
-      hasError: false
+      error: {
+        hasError: false,
+        errorMessage: "",
+        errorElementName: ""
+      }
     }
   },
   // ************************************************************************
@@ -114,50 +114,55 @@ var Input = React.createClass({
   // ************************************************************************
   // Run when any changes happen to the input
   checkInput: function(e) {
+    // Sets initial error to false
+    var doesHaveError = false;
     // Checks to make sure that the input is required (if not, no need to show error)
     // And that the input has been entered at least once
-    if(this.props.isRequired === true && hasEnteredInput !== false) {
-      // Gets the lengs of the string
-      var stringLength = e.target.value.split("").length,
-      // Sets initial error to false
-          doesHaveError = false;
-      // Checks to see if the value is blank ("")
-      if(stringLength == 0) {
-        // Since this field is required and the length of the string in the input
-        // is false, changes the error to true
-        doesHaveError = true;
+    if(hasEnteredInput !== false) {
+      // Checking only if the form field is required
+      if(this.props.isRequired === true) {
+        // Gets the lengs of the string
+        var stringLength = e.target.value.split("").length;
+        // Checks to see if the value is blank ("")
+        if(stringLength == 0) {
+          // Since this field is required and the length of the string in the input
+          // is false, changes the error to true
+          doesHaveError = true;
+          errorMessage = this.props.label + " is a required field!";
+        }
       }
-      // Sets state to new value
-      this.setState({hasError: doesHaveError}, function() {
-        // Then bubbles the state up to the parent
-        // TODO: Need to bubble up an error Object to parent, as opposed to boolean
-        return this.props.handleError(this.state.hasError);
-      });
+      // Checking for password and email input types
+      // If the event is not an input event
+      if(e.type != "input") {
+        // If the event is not an input event
+        if(e.target.value !== "") {
+          // If it's a password type, checks for a password error
+          if(this.props.type === "password") {
+            doesHaveError = !passwordRegExp.test(e.target.value);
+            errorMessage = "Your password need to be at least 6 characters!";
+          }
+          // If it's an email password type, checks for an email error
+          if(this.props.type === "email") {
+            doesHaveError = !emailRegExp.test(e.target.value);
+            errorMessage = "That email doesn't look quite right. Try again?";
+          }
+        }
+      }
     }
+    this.setState({
+      error: {
+        hasError: doesHaveError,
+        errorMessage: errorMessage,
+        errorElementName: e.target.name
+      }
+    }, function() {
+      // Bubble event up
+      // this.props.handleError({
+      //   elementName: true
+      // });
+    })
     // If the prop is not required or hasn't been entered, set hasEnteredInput to true
     return hasEnteredInput = true;
-  },
-  // Checks the password against a RegExp
-  checkPassword: function(e) {
-    var regExp = new RegExp("[a-z0-9]{5,}", "g");
-    // Start off by removing whatever error was already there
-    this.setState({hasError: false});
-    // Then run the errorHandling function, passing the event, the RegExp to compare against, and the error message
-    return this.setState(errorHandling(e, regExp, "Your password is too short!"), function() {
-      this.setState({errorMessage: "Your password is too short! It must be at least 6 characters long."})
-      return this.props.setCanSubmit(this.state.hasError);
-    });
-  },
-  // Checks the password against a RegExp
-  checkEmail: function(e) {
-    var regExp = new RegExp("^[a-z0-9](\\.?[a-z0-9_-]){0,}@[a-z0-9-]+\\.([a-z]{1,6}\\.)?[a-z]{2,6}$", "g");
-    // Start off by removing whatever error was already there
-    this.setState({hasError: false});
-    // Then run the errorHandling function, passing the event, the RegExp to compare against, and the error message
-    return this.setState(errorHandling(e, regExp, "That doesn't look quite like an email address."), function() {
-      this.setState({errorMessage: "That doesn't look quite like an email address."})
-      return this.props.setCanSubmit(this.state.hasError);
-    });
   },
   // ************************************************************************
   // RENDER
@@ -180,25 +185,14 @@ var Input = React.createClass({
   },
   // Renders an error if there is one
   displayError: function() {
-    // Need to handle both props and state
-    // Since the input can determine it has an error
-    // And, in addition, an error can be from a parent (such as the PasswordInput component)
-    // The internal errors are handled via state
-    // External errors handled via props
-    if(this.props.hasError) {
-      return ( <InputError errorMessage={this.props.errorMessage} /> )
-    }
-    if (this.state.hasError) {
+    if (this.state.error.hasError) {
       // The errorMessage is created on render from the label and an additional
       // piece of text to tell that it's required
       // TODO: Look into this - is it the best way?
-      return ( <InputError errorMessage={errorMessage} /> )
+      return ( <InputError errorMessage={this.state.error.errorMessage} /> )
     }
   },
   render: function () {
-    // Defines the errorMessage
-    // TODO: Move to componentDidMount() function to prevent rewriting var on render
-    errorMessage = this.props.label + " is a required field!";
     // Renders the form
     return (
       <div style={inputContainerStyles}>
