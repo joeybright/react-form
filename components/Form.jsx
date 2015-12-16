@@ -131,7 +131,7 @@ var Form = React.createClass({
   },
   render: function () {
     return (
-      <form name="registerForm" style={formStyles}>
+      <form name={this.props.data.name} style={formStyles}>
         {this.generateForm(this)}
         {this.displaySubmitButton()}
       </form>
