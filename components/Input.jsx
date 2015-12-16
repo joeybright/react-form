@@ -51,6 +51,9 @@ var Input = React.createClass({
     // Defaults to false
     hasError: React.PropTypes.bool.isRequired
   },
+  // ************************************************************************
+  // INIT
+  // ************************************************************************
   // Defines the default props
   getDefaultProps: function() {
     // Currently defines the type as "text"
@@ -71,6 +74,9 @@ var Input = React.createClass({
       hasError: false
     }
   },
+  // ************************************************************************
+  // EVENTS
+  // ************************************************************************
   // Handles onChange event
   handleChange: function(e) {
     // First, the input checks itself
@@ -98,6 +104,9 @@ var Input = React.createClass({
       this.props.onFocusFunc(e);
     }
   },
+  // ************************************************************************
+  // CHECK
+  // ************************************************************************
   // Run when any changes happen to the input
   checkInput: function(e) {
     // Checks to make sure that the input is required (if not, no need to show error)
@@ -145,6 +154,9 @@ var Input = React.createClass({
       return this.props.setCanSubmit(this.state.hasError);
     });
   },
+  // ************************************************************************
+  // RENDER
+  // ************************************************************************
   // Renders the label (if there is one)
   displayLabel: function() {
     // If there's a label
