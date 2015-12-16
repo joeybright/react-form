@@ -6,7 +6,7 @@
 // components/PasswordInput.jsx
 var inputErrorHandling = function(e, regExp, errorMessage) {
   var result = regExp.test(e.target.value);
-  // If the event is an input
+  // If the event is not an input event
   if(e.type != "input") {
     // And if the password exists
     if(e.target.value !== "") {
