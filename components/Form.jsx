@@ -42,25 +42,27 @@ var Form = React.createClass({
       console.log("Can't submit this form!");
     }
   },
-  // Both handle error and set can submit need to update an object
-  // similar to how form data is being handled (using the "name" attr)
-  // checks all of the items in the array
-  // if they don't have errors,
-  // set state to false (otherwise true)
-  // if they can't submit
-  // set state to false (true otherwise)
+  // Handles errors bubbled up from children and makes sure to set the state
+  // Uses a similar method of tracking errors of individual elements as the
+  // saveData() function
   handleError: function(error) {
-    console.log(error);
-    // this.setState(
-    //   {
-    //     error: {
-    //       hasError: this.state.hasError,
-    //       errorMessage: error.info
-    //     }
-    //   }, function() {
-    //     // Bubble up to parent
-    //     // return this.props.onError(this.state);
-    // });
+    // Establishes a temporary array.
+    var allErrors = new Array();
+    // Adds a property to the errors object with the hasError value (bool) as
+    // the value and the element name as the key
+    errors[error.errorElementName] = error.hasError;
+    // Takes all of the current elements in the error object and itterates through the,
+    for(var prop in errors) {
+      // Adds the value (true/false) of each element and adds it to the allErrors array
+      allErrors.push(errors[prop]);
+    }
+    // If true is present in the array (as in there are errors)
+    if(allErrors.indexOf(true) > -1) {
+      // Edits the state to show that the form can't submit
+      return this.setState({canSubmit: false});
+    }
+    // Otherwise, the form can submit
+    return this.setState({canSubmit: true});
   },
   // ************************************************************************
   // CHECK
