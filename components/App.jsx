@@ -6,7 +6,7 @@ var ContactForm = require('./Form.jsx')
 var contactFormData = require('../data/contact-form.json')
 
 var contactFormStyles = {
-  width: "500px",
+  maxWidth: "500px",
   margin: "auto"
 }
 var headerStyles = {
