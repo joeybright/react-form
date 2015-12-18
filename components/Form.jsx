@@ -67,11 +67,6 @@ var Form = React.createClass({
   // ************************************************************************
   // CHECK
   // ************************************************************************
-  setCanSubmit: function(submit) {
-    // console.log(submit);
-    // if(canSubmit.each() == true) { make can submit a true - otherwise, it's false }
-    // return this.setState({canSubmit: submit});
-  },
   // Function that saves data to the formData object - this function is passed to
   // the Input components and runs on each change (i.e. whenever something happens to the
   // text in the input)
