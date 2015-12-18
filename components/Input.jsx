@@ -163,10 +163,7 @@ var Input = React.createClass({
         errorElementName: e.target.name
       }
     }, function() {
-      // Bubble event up
-      // this.props.handleError({
-      //   elementName: true
-      // });
+      this.props.handleError(this.state.error);
     })
     // If the prop is not required or hasn't been entered, set hasEnteredInput to true
     return hasEnteredInput = true;
