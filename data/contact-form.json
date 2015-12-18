@@ -28,7 +28,7 @@
     },
     {
       "label" : "Last Name",
-      "name" : "lase-name",
+      "name" : "last-name",
       "type" : "text",
       "isRequired" : false,
       "placeholder" : "First name here, please"
