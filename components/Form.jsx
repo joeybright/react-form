@@ -95,7 +95,6 @@ var Form = React.createClass({
                   isRequired={data.isRequired}
                   onChangeFunc={form.saveData}
                   handleError={form.handleError} />
-          break;
         case "password":
           return <Input
                   type="password"
@@ -105,7 +104,6 @@ var Form = React.createClass({
                   isRequired={data.isRequired}
                   onChangeFunc={form.saveData}
                   handleError={form.handleError} />
-          break;
         case "email":
           return <Input
                   type="email"
@@ -115,7 +113,6 @@ var Form = React.createClass({
                   isRequired={data.isRequired}
                   onChangeFunc={form.saveData}
                   handleError={form.handleError} />
-          break;
       }
     });
     return formNodes;
