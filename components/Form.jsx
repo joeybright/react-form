@@ -9,6 +9,7 @@ var formStyles = {
 }
 
 var formData = {};
+var errors = {};
 
 var Form = React.createClass({
   propTypes: {
