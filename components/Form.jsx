@@ -24,6 +24,7 @@ var Form = React.createClass({
   // INIT
   // ************************************************************************
   getInitialState: function() {
+    // The form initially cannot and should not be submittable
     return {
       canSubmit: false
     }
@@ -34,11 +35,14 @@ var Form = React.createClass({
   handleSubmit: function(e) {
     // Prevents default action
     e.preventDefault();
-    // If the form can submit
+    // If the form can submit (the state should make sure that the form cannot
+    // be submitted through disabling the button - however, if there's a workaround
+    // via JS to submit the form, this double-checks the state)
     if(this.state.canSubmit === true) {
       // Bubbles up both the event and the formData object
       this.props.onSubmit(e, formData);
     } else {
+      // Otherwise, prints an error message to the console
       console.log("Can't submit this form!");
     }
   },
