@@ -73,7 +73,7 @@ var Input = React.createClass({
     // The component can change it's own state or change states via passed props
     return {
       error: {
-        hasError: false,
+        hasError: true,
         errorMessage: "",
         errorElementName: ""
       }
