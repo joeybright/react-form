@@ -79,6 +79,13 @@ var Input = React.createClass({
       }
     }
   },
+  // After the component mounts
+  componentDidMount: function() {
+    // Send up the props to the parent
+    // Makes sure that the errors array in the parent is set up after all of
+    // its children are mounted
+    this.props.handleError(this.state.error);
+  },
   // ************************************************************************
   // EVENTS
   // ************************************************************************
