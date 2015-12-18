@@ -122,8 +122,7 @@ var Form = React.createClass({
   // Displays the submit button, diabled if the form can't (and shouldn't submit)
   // Enabled if it can submit
   displaySubmitButton: function() {
-    if(this.state.canSubmit == false &&
-       this.state.hasError == true) {
+    if(this.state.canSubmit === false) {
       return (
         <SubmitButton text={this.props.data.submit.text} onClick={this.handleSubmit} disabled="true" />
       )
