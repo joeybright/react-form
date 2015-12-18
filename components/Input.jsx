@@ -75,7 +75,7 @@ var Input = React.createClass({
       error: {
         hasError: true,
         errorMessage: "",
-        errorElementName: ""
+        errorElementName: this.props.name
       }
     }
   },
